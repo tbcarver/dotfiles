@@ -1,6 +1,11 @@
 
+# Right and left ctrl arrow keys
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+# Fix gpg signing issue
+# https://stackoverflow.com/questions/68946047/signing-issue-with-export-gpg-tty-tty
+export GPG_TTY=$(tty)
 
 # Ensure agent is running
 ssh-add -l &>/dev/null
@@ -32,9 +37,8 @@ fi
 if [[ $- == *i* ]]; then
     # set up ssh key server
     if [[ -x /usr/bin/keychain ]]; then
-        eval $(keychain --eval --agents gpg B7B68B684BFF65D93A24FFC85619EB9C2B37E349 -q)
+        # eval $(keychain --eval --agents gpg B7B68B684BFF65D93A24FFC85619EB9C2B37E349 -q)
         eval $(keychain --agents ssh -q)
-        export GPG_TTY=$(tty)
     fi
 fi
 
