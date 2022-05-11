@@ -1,13 +1,41 @@
 
+
+# Ensure agent is running
+ssh-add -l &>/dev/null
+if [[ "$?" == 2 ]]; then
+    # Could not open a connection to your authentication agent.
+
+    # Load stored agent connection info.
+    test -r ~/.ssh-agent && \
+        eval "$(<~/.ssh-agent)" >/dev/null
+
+    ssh-add -l &>/dev/null
+    if [[ "$?" == 2 ]]; then
+        # Start agent and store agent connection info.
+        (umask 066; ssh-agent > ~/.ssh-agent)
+        eval "$(<~/.ssh-agent)" >/dev/null
+    fi
+fi
+
+# Load identities
+ssh-add -l &>/dev/null
+if [[ "$?" == 1 ]]; then
+    # The agent has no identities.
+    # Time to add one.
+    ssh-add ~/.ssh/id_rsa
+    keychain --eval --agents gpg B7B68B684BFF65D93A24FFC85619EB9C2B37E349
+fi
+
 # Setup keychain
 # is this an interactive shell?
 if [[ $- == *i* ]]; then
     # set up ssh key server
     if [[ -x /usr/bin/keychain ]]; then
-        eval $(keychain --eval --agents ssh,gpg -q)
+        eval $(keychain --agents ssh,gpg -q)
         export GPG_TTY=$(tty)
     fi
 fi
+
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
