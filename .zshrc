@@ -1,4 +1,6 @@
 
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
 # Ensure agent is running
 ssh-add -l &>/dev/null
@@ -23,7 +25,6 @@ if [[ "$?" == 1 ]]; then
     # The agent has no identities.
     # Time to add one.
     ssh-add ~/.ssh/id_rsa
-    keychain --eval --agents gpg B7B68B684BFF65D93A24FFC85619EB9C2B37E349
 fi
 
 # Setup keychain
@@ -31,7 +32,8 @@ fi
 if [[ $- == *i* ]]; then
     # set up ssh key server
     if [[ -x /usr/bin/keychain ]]; then
-        eval $(keychain --agents ssh,gpg -q)
+        eval $(keychain --eval --agents gpg B7B68B684BFF65D93A24FFC85619EB9C2B37E349 -q)
+        eval $(keychain --agents ssh -q)
         export GPG_TTY=$(tty)
     fi
 fi
