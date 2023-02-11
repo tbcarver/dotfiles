@@ -3,6 +3,14 @@
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+# History
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+
 # Fix gpg signing issue
 # https://stackoverflow.com/questions/68946047/signing-issue-with-export-gpg-tty-tty
 export GPG_TTY=$(tty)
