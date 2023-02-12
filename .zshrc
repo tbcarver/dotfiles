@@ -51,8 +51,10 @@ if [[ $- == *i* ]]; then
 fi
 
 # Set the mtu for the fashionphile vpn of 1400
-if [[ ! $(cat /sys/class/net/eth0/mtu) == "1400" ]]; then
-  sudo ifconfig eth0 mtu 1400
+if test -e /sys/class/net/eth0/mtu; then
+	if [[ ! $(cat /sys/class/net/eth0/mtu) == "1400" ]]; then
+	  sudo ifconfig eth0 mtu 1400
+	fi
 fi
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
