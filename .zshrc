@@ -7,9 +7,13 @@ bindkey "^[[1;5D" backward-word
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt appendhistory
+setopt histnorecord
+#setopt appendhistory
 setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
+#setopt SHARE_HISTORY
+
+# Editor
+export EDITOR=nano
 
 # Fix gpg signing issue
 # https://stackoverflow.com/questions/68946047/signing-issue-with-export-gpg-tty-tty
