@@ -7,7 +7,7 @@ bindkey "^[[1;5D" backward-word
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt histnorecord
+#setopt histnorecord
 #setopt appendhistory
 setopt INC_APPEND_HISTORY
 #setopt SHARE_HISTORY
