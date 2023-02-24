@@ -3,6 +3,9 @@
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
+# Alias
+alias pa:tinker='php artisan tinker'
+
 # History
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
