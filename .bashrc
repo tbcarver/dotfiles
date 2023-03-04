@@ -8,6 +8,11 @@ case $- in
       *) return;;
 esac
 
+if command -v zsh >/dev/null 2>&1; then
+  # Start zsh and exit bashrc
+  exec zsh
+fi
+
 export GPG_TTY=$(tty)
 
 
