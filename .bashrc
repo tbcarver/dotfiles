@@ -8,21 +8,25 @@ case $- in
       *) return;;
 esac
 
-if command -v zsh >/dev/null 2>&1; then
-  # Start zsh and exit bashrc
-  exec zsh
+if [ -f "$HOME/.keychain-setup.sh" ]; then
+    source "$HOME/.keychain-setup.sh"
 fi
 
-export GPG_TTY=$(tty)
+# if command -v zsh >/dev/null 2>&1; then
+#   # Start zsh and exit bashrc
+#   exec zsh
+# fi
+
+# export GPG_TTY=$(tty)
 
 
-# is this an interactive shell?
-if [[ $- == *i* ]]; then
-    # set up ssh key server
-    if [[ -x /usr/bin/keychain ]]; then
-        eval $(keychain --eval --agents ssh,gpg -q)
-    fi
-fi
+# # is this an interactive shell?
+# if [[ $- == *i* ]]; then
+#     # set up ssh key server
+#     if [[ -x /usr/bin/keychain ]]; then
+#         eval $(keychain --eval --agents ssh,gpg -q)
+#     fi
+# fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
