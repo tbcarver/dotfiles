@@ -71,7 +71,7 @@ fi
 if test -e /sys/class/net/eth0/mtu; then
 	if [[ ! $(cat /sys/class/net/eth0/mtu) == "1400" ]]; then
 		if sudo ip link set dev eth0 mtu 1400 type noop 2>/dev/null; then
-			sudo ifconfig eth0 mtu 1400
+			sudo ip link set eth0 mtu 1400
 		fi
 	fi
 fi
