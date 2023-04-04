@@ -25,4 +25,5 @@ if [[ -n "$identity_files" ]]; then
   done
 fi
 
+export GPG_TTY=$(tty)
 eval $(keychain --eval --agents gpg -q)
