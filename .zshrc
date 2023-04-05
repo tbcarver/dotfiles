@@ -19,7 +19,9 @@ SAVEHIST=10000
 #setopt appendhistory
 setopt INC_APPEND_HISTORY
 #setopt SHARE_HISTORY
-setopt HIST_IGNORE_DUPS
+#setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
 
 # Editor
 export EDITOR=nano
