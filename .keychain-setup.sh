@@ -25,5 +25,6 @@ if [[ -n "$identity_files" ]]; then
   done
 fi
 
+# Set GPG_TTY to allow for enter passphrase screen in terminal
 export GPG_TTY=$(tty)
 eval $(keychain --eval --agents gpg -q)
