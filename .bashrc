@@ -9,7 +9,7 @@ case $- in
 esac
 
 if [ -f "$HOME/.keychain-setup.sh" ]; then
-    source "$HOME/.keychain-setup.sh"
+   source "$HOME/.keychain-setup.sh"
 fi
 
 # if command -v zsh >/dev/null 2>&1; then

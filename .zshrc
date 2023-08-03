@@ -10,6 +10,8 @@ bindkey "^[[1;5D" backward-word
 
 # Alias
 alias pa:tinker='php artisan tinker'
+alias pt='php artisan tinker'
+alias tinker='php artisan tinker'
 
 # History
 HISTFILE=~/.zsh_history
@@ -27,7 +29,7 @@ setopt HIST_IGNORE_SPACE
 export EDITOR=nano
 
 if [ -f "$HOME/.keychain-setup.sh" ]; then
-    source "$HOME/.keychain-setup.sh"
+   source "$HOME/.keychain-setup.sh"
 fi
 
 # # Fix gpg signing issue
