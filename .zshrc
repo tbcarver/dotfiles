@@ -9,9 +9,11 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 # Alias
-alias pa:tinker='php artisan tinker'
-alias pt='php artisan tinker'
-alias tinker='php artisan tinker'
+if command -v php > /dev/null 2>&1; then
+    alias pa='php artisan'
+    alias tinker='php artisan tinker'
+fi
+
 
 # History
 HISTFILE=~/.zsh_history
