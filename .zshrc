@@ -101,5 +101,16 @@ if [[ $(whoami) == "vscode" ]]; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  \. "$NVM_DIR/nvm.sh"
+  \. "$NVM_DIR/bash_completion"
+
+  if [[ -f package.json ]]; then
+      node_version=$(jq -r '.engines.node' package.json)
+      if [[ -n "$node_version" && ! "$node_version" =~ ^null ]]; then
+          main_version=$(echo "$node_version" | grep -oP '(?<=\>=)\d+' | cut -d '.' -f 1)
+          nvm use "$main_version" &> /dev/null
+      fi
+  fi
+fi
+
