@@ -10,10 +10,15 @@ bindkey "^[[1;5D" backward-word
 
 # Alias
 if command -v php > /dev/null 2>&1; then
-    alias pa='php artisan'
-    alias tinker='php artisan tinker'
+    alias pa='sudo -u www-data php artisan'
+    alias tinker='sudo -u www-data php artisan tinker'
 fi
-
+alias gpu='git pull'
+alias gps='git push'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gcm='git commit -m'
+alias gca='git commit -am'
 
 # History
 HISTFILE=~/.zsh_history
@@ -73,11 +78,13 @@ fi
 #     fi
 # fi
 
-# Set the mtu for the fashionphile vpn of 1400
+# OLD: Set the mtu for the fashionphile vpn of 1400
+# Set the mtu for the current windows adapter
+# netsh interface ipv4 show subinterfaces
 if test -e /sys/class/net/eth0/mtu; then
-	if [[ ! $(cat /sys/class/net/eth0/mtu) == "1400" ]]; then
-		if sudo ip link set dev eth0 mtu 1400 type noop 2>/dev/null; then
-			sudo ip link set eth0 mtu 1400
+	if [[ ! $(cat /sys/class/net/eth0/mtu) == "1380" ]]; then
+		if sudo ip link set dev eth0 mtu 1380 type noop 2>/dev/null; then
+			sudo ip link set eth0 mtu 1380
 		fi
 	fi
 fi
