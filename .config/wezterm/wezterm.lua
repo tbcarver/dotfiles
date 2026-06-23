@@ -61,4 +61,6 @@ config.keys = {
   },
 }
 
+config.notification_handling = "SuppressFromFocusedPane"
+
 return config
