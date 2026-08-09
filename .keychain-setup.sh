@@ -4,7 +4,7 @@ if [ -n "$TERM" ]; then
   ssh_config_file="$HOME/.ssh/config"
 
   if [ -f "$ssh_config_file" ]; then
-    identity_files=$(grep -i "IdentityFile" ~/.ssh/config | awk '{print $2}')
+    identity_files=$(grep -i "IdentityFile" ~/.ssh/config | awk -v home="$HOME" '{sub(/^~/, home, $2); print $2}')
 
     if grep -q "UseKeychain yes" "$ssh_config_file" \
       && ! grep -q "IgnoreUnknown UseKeychain" "$ssh_config_file"; then
