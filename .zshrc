@@ -27,6 +27,7 @@ SAVEHIST=10000
 #setopt histnorecord
 #setopt appendhistory
 setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
 #setopt SHARE_HISTORY
 #setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
@@ -147,3 +148,22 @@ if command -v gh &> /dev/null; then
     alias 'gh?'='copilot_gh_suggest'
   fi
 fi
+export PATH="$HOME/.local/bin:$PATH"
+
+alias wagit='git --git-dir=/home/tyler/fashionphile/web-app-local.git --work-tree=/home/tyler/fashionphile/web-app'
+
+# mtod: merge current branch into develop and portal-develop, push, return
+mtod() {
+  local src target
+  src=$(git branch --show-current) || return 1
+  [[ -z $src ]] && { echo "detached HEAD, aborting"; return 1 }
+  local targets=("$@"); (( ${#targets} )) || targets=(develop)
+  for target in "${targets[@]}"; do
+    echo "==> $src -> $target"
+    git checkout "$target" && git pull --ff-only && git merge --no-edit "$src" && git push || {
+      echo "!! failed merging $src into $target — you're on $target"
+      return 1
+    }
+  done
+  git checkout "$src"
+}
