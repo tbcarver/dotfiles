@@ -150,7 +150,7 @@ if command -v gh &> /dev/null; then
 fi
 export PATH="$HOME/.local/bin:$PATH"
 
-alias wagit='git --git-dir=/home/tyler/fashionphile/web-app-local.git --work-tree=/home/tyler/fashionphile/web-app'
+alias wagit='git --git-dir=$HOME/fashionphile/web-app-local.git --work-tree=$HOME/fashionphile/web-app'
 
 # mtod: merge current branch into develop and portal-develop, push, return
 mtod() {
