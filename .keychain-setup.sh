@@ -20,6 +20,9 @@ if [ -n "$TERM" ]; then
       eval $(keychain --eval --agents ssh -q --inherit any-once $identity_file)
     done
   fi
+
+  # Host-local agent path for processes started without a shell (e.g. t3 serve); see /etc/ssh/ssh_config.d/t3-agent.conf
+  [[ "$SSH_AUTH_SOCK" == /tmp/ssh-* ]] && ln -sf "$SSH_AUTH_SOCK" "/tmp/ssh-agent-$(id -un).sock"
 fi
 
 # Set GPG_TTY to allow for enter passphrase screen in terminal
